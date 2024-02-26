@@ -3,17 +3,20 @@ using JsonToCsvTool.Application;
 using JsonToCsvTool.Domain;
 using System.Text.Json;
 
-Console.WriteLine("Hello, World!");
+Console.WriteLine("List Of keycloak Ids");
 // Load JSON file
-string jsonFilePath = "data/wikiUserList.json"; // Change this to your JSON file path
+string jsonFilePath = "../../../data/response.json"; // Change this to your JSON file path
 string jsonString = File.ReadAllText(jsonFilePath);
-
+JsonSerializerOptions options = new()
+{
+    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+};
 // Deserialize JSON
-JsonWikiUserSearchResults jsonObject = JsonSerializer.Deserialize<JsonWikiUserSearchResults>(jsonString);
+JsonWikiUserSearchResults wikiUserSearchResults = JsonSerializer.Deserialize<JsonWikiUserSearchResults>(jsonString, options);
 
 // Filter JSON
-JsonWikiUsers filteredItems = new Filter().FilterOutByProviderKey(jsonObject.Users, "Keycloack");
+JsonWikiUsers filteredUsers = new Filter().FilterByProviderKey(wikiUserSearchResults.Users, "a7787426-5050-4348-96ba-a45b635b6f0f");
 
 // Serialize filtered JSON
-string filteredJsonString = JsonSerializer.Serialize(filteredItems);
-Console.WriteLine(filteredJsonString);
+string filteredUserIdListString = JsonSerializer.Serialize<JsonWikiUserSearchResults>(new() { Users = filteredUsers }, options);
+Console.WriteLine(filteredUserIdListString);

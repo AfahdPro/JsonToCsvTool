@@ -4,12 +4,12 @@ namespace JsonToCsvTool.Application;
 
 public class Filter
 {
-    public JsonWikiUsers FilterOutByProviderKey(JsonWikiUsers usersToFilter, string providerKeyValue)
+    public JsonWikiUsers FilterByProviderKey(JsonWikiUsers usersToFilter, string providerKeyValue)
     {
         List<JsonWikiUser> filteredUsers = [];
         foreach (JsonWikiUser user in usersToFilter.List)
         {
-            if (user.ProviderKey != providerKeyValue)
+            if (user.ProviderKey == providerKeyValue)
                 filteredUsers.Add(user);
         }
 

@@ -28,7 +28,7 @@ public class JsonWikiUsersTests
         List<int> expected =[1,2];
 
         // When
-        var actual = wikiUsers.IdList();
+        var actual = wikiUsers.IdList;
 
         //Should
         actual.Should().BeEquivalentTo(expected);
