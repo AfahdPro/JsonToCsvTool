@@ -6,6 +6,7 @@ using System.Text.Json;
 Console.WriteLine("List Of keycloak Ids");
 // Load JSON file
 string jsonFilePath = "../../../data/response.json"; // Change this to your JSON file path
+string outputFilePath = "../../../data"; 
 string jsonString = File.ReadAllText(jsonFilePath);
 JsonSerializerOptions options = new()
 {
@@ -17,6 +18,13 @@ JsonWikiUserSearchResults wikiUserSearchResults = JsonSerializer.Deserialize<Jso
 // Filter JSON
 JsonWikiUsers filteredUsers = new Filter().FilterByProviderKey(wikiUserSearchResults.Users, "a7787426-5050-4348-96ba-a45b635b6f0f");
 
-// Serialize filtered JSON
-string filteredUserIdListString = JsonSerializer.Serialize<JsonWikiUserSearchResults>(new() { Users = filteredUsers }, options);
-Console.WriteLine(filteredUserIdListString);
+//// Serialize filtered JSON
+//string filteredUserIdListString = JsonSerializer.Serialize<JsonWikiUserSearchResults>(new() { Users = filteredUsers }, options);
+//Console.WriteLine(filteredUserIdListString);
+
+using (StreamWriter outputFile = new(Path.Combine(outputFilePath, "idList.txt")))
+{
+    outputFile.WriteLine("id");
+    foreach (var userId in filteredUsers.IdList)
+        outputFile.WriteLine(userId.ToString());
+}
