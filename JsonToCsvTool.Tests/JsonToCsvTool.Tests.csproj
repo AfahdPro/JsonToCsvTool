@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\JsonToCsvTool.Application\JsonToCsvTool.Application.csproj" />
+    <ProjectReference Include="..\JsonToCsvTool.Domain\JsonToCsvTool.Domain.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,13 +1,18 @@
-using System.Text.Json.Nodes;
+using JsonToCsvTool.Domain;
 
 namespace JsonToCsvTool.Application;
 
 public class Filter
 {
-    public JsonArray FilterByPropertyValue(JsonArray jsonArrayToFilter, string propertyName, string propertyValue)
+    public JsonWikiUsers FilterOutByProviderKey(JsonWikiUsers usersToFilter, string providerKeyValue)
     {
-        JsonArray jsonArrayFiltered = [];
+        List<JsonWikiUser> filteredUsers = [];
+        foreach (JsonWikiUser user in usersToFilter.List)
+        {
+            if (user.ProviderKey != providerKeyValue)
+                filteredUsers.Add(user);
+        }
 
-        return jsonArrayFiltered;
+        return new() { List = filteredUsers };
     }
 }
