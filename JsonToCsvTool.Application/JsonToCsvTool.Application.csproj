@@ -11,4 +11,8 @@
     <PackageReference Include="ChoETL.JSON" Version="1.2.1.64" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\JsonToCsvTool.Domain\JsonToCsvTool.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
